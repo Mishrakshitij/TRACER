@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "r3af"
 version = "0.1.0"
 description = "TRACER: Trace-Regularized Training Against Indirect Prompt Injection"
+license = { text = "MIT" }
 requires-python = ">=3.10"
 dependencies = [
     "torch>=2.1",

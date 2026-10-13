@@ -213,4 +213,4 @@ tests/             # Unit tests
 
 ## License
 
-This code is released for research purposes.
+Released under the [MIT License](LICENSE). Models and datasets used in the experiments (Qwen2.5, GSM8K, Natural Questions, TriviaQA) keep their own licenses.
