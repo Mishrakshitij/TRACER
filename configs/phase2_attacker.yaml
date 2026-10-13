@@ -1,0 +1,17 @@
+# Phase 2: Learned attacker training
+phase: 2
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+attacker_model_name: "Qwen/Qwen2.5-1.5B-Instruct"
+quantization: null
+use_peft: true
+
+datasets:
+  - gsm8k
+
+epochs: 1
+batch_size: 2
+attacker_lr: 5e-6
+max_attack_tokens: 512
+
+output_dir: "outputs/r3af/phase2_attacker"
+seed: 42

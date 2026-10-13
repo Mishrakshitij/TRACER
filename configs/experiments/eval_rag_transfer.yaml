@@ -1,0 +1,41 @@
+# RAG-framed transfer evaluation
+# Tests whether adversarial robustness transfers across framing
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+# RAG framing — the key difference
+attack_framing: "rag"
+
+# Same attacks as ATRC+pinj (best config)
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+  - prompt_injection
+attack_mix_weights:
+  - 0.33
+  - 0.33
+  - 0.34
+benign_ratio: 0.15
+num_turns: 3
+
+# Bumped limits for document wrapper overhead (~50 extra tokens)
+max_seq_length: 2048
+max_new_tokens: 512
+max_attack_tokens: 640
+
+temperature: 0.7
+top_p: 0.95
+
+# Skip heavy models
+prm_model_name: ""
+nli_model_name: ""
+
+output_dir: "outputs/r3af/eval_rag_transfer"
+report_to: []
+seed: 42

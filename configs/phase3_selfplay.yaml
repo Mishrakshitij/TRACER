@@ -1,0 +1,32 @@
+# Phase 3: Self-play
+phase: 3
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: null
+use_peft: true
+
+datasets:
+  - gsm8k
+
+epochs: 3
+batch_size: 2
+group_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 5e-6
+
+loss_type: "combined"
+beta: 0.04
+epsilon: 0.2
+lambda_tcr: 0.1
+lambda_sdpo: 0.0
+
+w_prm: 0.25
+w_anchor: 0.20
+w_corrigible: 0.20
+w_ans: 0.25
+w_len: 0.10
+
+num_turns: 3
+benign_ratio: 0.15
+
+output_dir: "outputs/r3af/phase3_selfplay"
+seed: 42

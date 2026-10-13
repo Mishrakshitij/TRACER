@@ -1,0 +1,22 @@
+# Dry-run: Phase 0 SFT with Qwen2.5-7B-Instruct (4-bit)
+phase: 0
+model_name: "Qwen/Qwen2.5-7B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+epochs: 1
+batch_size: 1
+gradient_accumulation_steps: 1
+learning_rate: 2.0e-5
+max_steps: 2
+
+loss_type: "grpo"
+dry_run: true
+report_to: []
+output_dir: "outputs/r3af/dry_runs/sft"
+seed: 42

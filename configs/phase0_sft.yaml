@@ -1,0 +1,19 @@
+# Phase 0: SFT warmup
+phase: 0
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: null
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+epochs: 2
+batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 2e-5
+
+loss_type: "grpo"
+output_dir: "outputs/r3af/phase0_sft"
+seed: 42

@@ -1,0 +1,76 @@
+# Ablation: GRPO + TCR (bug-fixed TCR with aligned spans)
+# Policy: GRPO | Reg: tcr_kl | Isolates: TCR effect (with position fix)
+phase: 1
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+epochs: 3
+batch_size: 1
+group_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 2.0e-6
+warmup_ratio: 0.1
+max_grad_norm: 1.0
+weight_decay: 0.01
+max_train_samples: 2000
+
+loss_type: "combined"
+policy_loss_type: "grpo"
+reg_loss_type: "tcr_kl"
+beta: 0.10
+epsilon: 0.2
+lambda_reg: 0.1
+lambda_sdpo: 0.0
+
+# TCR
+gate_mode: "hard"
+tcr_temperature: 1.0
+
+# Reward weights
+w_prm: 0.25
+w_anchor: 0.20
+w_corrigible: 0.20
+w_ans: 0.25
+w_len: 0.10
+
+# Environment
+num_turns: 3
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+attack_mix_weights:
+  - 0.5
+  - 0.5
+benign_ratio: 0.15
+
+# Sequence limits
+max_seq_length: 1536
+max_new_tokens: 512
+max_attack_tokens: 512
+
+# Skip heavy models
+prm_model_name: ""
+nli_model_name: ""
+
+# Generation
+temperature: 0.7
+top_p: 0.95
+
+# vLLM-accelerated generation
+use_vllm_generation: true
+vllm_gpu_id: 4
+vllm_lora_sync_steps: 250
+
+# Output
+output_dir: "outputs/r3af/ablation_grpo_tcr"
+logging_steps: 10
+save_steps: 250
+eval_steps: 250
+report_to: []
+seed: 42

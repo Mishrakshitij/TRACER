@@ -1,0 +1,61 @@
+# Dry-run: Phase 1 Retainer RL with Qwen2.5-7B-Instruct (4-bit)
+phase: 1
+model_name: "Qwen/Qwen2.5-7B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+epochs: 1
+batch_size: 1
+group_size: 2
+gradient_accumulation_steps: 1
+learning_rate: 1.0e-5
+max_steps: 2
+
+loss_type: "combined"
+beta: 0.04
+epsilon: 0.2
+lambda_tcr: 0.1
+lambda_sdpo: 0.0
+
+# Reward weights
+w_prm: 0.25
+w_anchor: 0.20
+w_corrigible: 0.20
+w_ans: 0.25
+w_len: 0.10
+
+# TCR
+gate_mode: "hard"
+tcr_temperature: 1.0
+
+# Environment
+num_turns: 3
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+attack_mix_weights:
+  - 0.5
+  - 0.5
+benign_ratio: 0.15
+
+# Skip heavy models for dry run
+prm_model_name: ""
+nli_model_name: ""
+
+# Reduce sequence length to avoid OOM (GSM8K is short)
+max_seq_length: 2048
+max_new_tokens: 512
+
+# Generation (lower temp for reproducibility in dry run)
+temperature: 0.7
+top_p: 0.95
+
+dry_run: true
+report_to: []
+output_dir: "outputs/r3af/dry_runs/phase1"
+seed: 42

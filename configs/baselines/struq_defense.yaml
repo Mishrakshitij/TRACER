@@ -1,0 +1,11 @@
+# Baseline: StruQ-style defense (SFT with structured formatting)
+phase: 0
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+use_peft: true
+datasets: ["gsm8k"]
+epochs: 3
+batch_size: 4
+learning_rate: 2e-5
+loss_type: "grpo"
+output_dir: "outputs/baselines/struq_defense"
+seed: 42

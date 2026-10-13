@@ -1,0 +1,38 @@
+# Evaluation config for Qwen2.5-3B-Instruct ablation checkpoints
+phase: 1
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+# Attack config (same as training so results are comparable)
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+attack_mix_weights:
+  - 0.5
+  - 0.5
+benign_ratio: 0.15
+num_turns: 3
+
+# Sequence limits
+max_seq_length: 2048
+max_new_tokens: 512
+max_attack_tokens: 512
+
+# Generation
+temperature: 0.7
+top_p: 0.95
+
+# Skip heavy models
+prm_model_name: ""
+nli_model_name: ""
+
+# Output
+output_dir: "outputs/r3af/eval"
+report_to: []
+seed: 42

@@ -1,0 +1,40 @@
+# Evaluate trained model on GSM8K with followup framing
+# Tests cross-framing transfer for the transfer matrix
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: "4bit"
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+# Followup framing
+attack_framing: "followup"
+
+# Same attacks
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+  - prompt_injection
+attack_mix_weights:
+  - 0.33
+  - 0.33
+  - 0.34
+benign_ratio: 0.15
+num_turns: 3
+
+max_seq_length: 2048
+max_new_tokens: 512
+max_attack_tokens: 512
+
+temperature: 0.7
+top_p: 0.95
+
+# Skip heavy models
+prm_model_name: ""
+nli_model_name: ""
+
+output_dir: "outputs/r3af/eval_gsm8k_followup"
+report_to: []
+seed: 42

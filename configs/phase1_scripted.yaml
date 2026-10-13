@@ -1,0 +1,61 @@
+# Phase 1: Scripted attacks
+phase: 1
+model_name: "Qwen/Qwen2.5-3B-Instruct"
+quantization: null
+use_peft: true
+lora_r: 64
+lora_alpha: 128
+
+datasets:
+  - gsm8k
+
+epochs: 3
+batch_size: 2
+group_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 1e-5
+
+loss_type: "combined"
+beta: 0.04
+epsilon: 0.2
+lambda_tcr: 0.1
+lambda_sdpo: 0.0
+
+# Reward weights
+w_prm: 0.25
+w_anchor: 0.20
+w_corrigible: 0.20
+w_ans: 0.25
+w_len: 0.10
+
+# TCR
+gate_mode: "hard"
+tcr_temperature: 1.0
+
+# Environment
+num_turns: 3
+attack_families:
+  - reasoning_rewrite
+  - preemptive_answer
+  - prompt_injection
+  - long_context_padding
+attack_mix_weights:
+  - 0.30
+  - 0.30
+  - 0.25
+  - 0.15
+benign_ratio: 0.15
+
+# PRM
+prm_model_name: "math-shepherd/math-shepherd-mistral-7b-prm"
+prm_threshold: 0.7
+
+# NLI
+nli_model_name: "microsoft/deberta-v3-large"
+
+# Generation
+temperature: 0.7
+top_p: 0.95
+
+output_dir: "outputs/r3af/phase1_scripted"
+seed: 42
