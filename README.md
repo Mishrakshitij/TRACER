@@ -3,7 +3,7 @@
 **Kshitij Mishra · Salem Lahlou · Nils Lukas**
 Mohamed bin Zayed University of Artificial Intelligence
 
-*Findings of EMNLP 2026*
+*Findings of EMNLP 2026* · [arXiv:2610.19133](https://arxiv.org/abs/2610.19133)
 
 Indirect prompt injection hides malicious instructions in content a model did not write: retrieved documents, tool outputs, or messages from other agents. This repository contains the code for **TRACER** (Trace-Regularized Adversarial Channel Exposure with Reward-shaping), a channel-aware adversarial training method against it.
 
